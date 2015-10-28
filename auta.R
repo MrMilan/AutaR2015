@@ -11,27 +11,36 @@ dim(auta) # vypisuje dimenze takulky dat
 summary(auta) # vypis celkoveho prehledu, dle charakteru 
 
 #----- bod 3 odlehla mereni (vizualizace take bod 4)
-boxplot(auta$mpg,ylab = 'Miles per Gallon [mpg]',horizontal = TRUE, main='' )
-boxplot(auta$cylinders,ylab = 'Cylindres [-]',horizontal = TRUE,main='' )
-boxplot(auta$horsepower,ylab = 'Power [Horse power]',horizontal = TRUE,main='' )
-boxplot(auta$weight,ylab = 'Weight [lbs]',horizontal = TRUE,main='' )
-boxplot(auta$acceleration,ylab = 'Acceleration [-]',horizontal = TRUE,main='' )
-boxplot(auta$modelyear,ylab = 'Model year [-]',horizontal = TRUE,main='' )
-boxplot(auta$displacement,ylab = 'Displacement [cubic inches]',horizontal = TRUE,main='' )
+mpg<-boxplot(auta$mpg,ylab = 'Miles per Gallon [mpg]',horizontal = TRUE, main='' )
+length(mpg$out)
+cy<- boxplot(auta$cylinders,ylab = 'Cylindres [-]',horizontal = TRUE,main='' )
+length(cy$out)
+ho<- boxplot(auta$horsepower,ylab = 'Power [Horse power]',horizontal = TRUE,main='' )
+length(ho$out)
+we<- boxplot(auta$weight,ylab = 'Weight [lbs]',horizontal = TRUE,main='' )
+length(we$out)
+ac<- boxplot(auta$acceleration,ylab = 'Acceleration [-]',horizontal = TRUE,main='' )
+length(ac$out)
+mo<- boxplot(auta$modelyear,ylab = 'Model year [-]',horizontal = TRUE,main='' )
+length(mo$out)
+di<- boxplot(auta$displacement,ylab = 'Displacement [cubic inches]',horizontal = TRUE,main='' )
+length(di$out)
+ro<- boxplot(auta$origin,ylab = 'Origin [-]',horizontal = TRUE,main='' )
+length(ro$out)
 
 
 #-----------------------bod 5 modelovali jsme-----------------
 #pred odstranenim (vizualizace tak bod 4)
 plot(auta$mpg, auta$weight,xlab = 'Miles per Gallon [mpg]', ylab = 'Vehicle weight [lbs]', col= 'blue')
 
-auta2 <- auta[auta$mpg<60,]
+auta2 <- auta[auta$mpg<45,]
 auta2 <- auta2[auta2$mpg>5,]
 
 #po odstraneni (vizualizace take bod 4)
 plot(auta2$mpg, auta2$weight,xlab = 'Miles per Gallon [mpg]', ylab = 'Vehicle weight [lbs]', col= 'blue')
 
 modelar <- lm(auta2$weight ~ auta2$mpg) 
-coef(modelat)
+coef(modelar)
 abline(coef(modelar), col='red')
 #------- bod 5 je statisticky vyznamna (podle vseho ne)
 anova(modelar)
@@ -45,16 +54,25 @@ anova(modelar)
 boxplot(auta$mpg ~ auta$modelyear,xlab = 'Model year [-]', ylab = 'Miles per Gallon [mpg]' )
 #zavislost roku vyroby na spotrebe
 boxplot(auta$mpg ~ auta$cylinders,xlab = 'Cylinders[-]', ylab = 'Miles per Gallon [mpg]' )
-#zavislost roku vyroby na pocte valcu
+#zavislost spotrebe na pocte valcu
 
-plot(auta$mpg, auta$horsepower,xlab = 'Miles per Gallon [mpg]', ylab = 'Power [Horse power]', col= 'blue')
+auta2 <- auta[auta$mpg<45,]
+auta2 <- auta2[auta2$mpg>5,]
+auta2 <- auta2[auta2$horsepower<201,]
+plot(auta2$mpg, auta2$horsepower,xlab = 'Miles per Gallon [mpg]', ylab = 'Power [Horse power]', col= 'blue')
 #zavislost spotreby na vykonu
+modelarHP <- lm(auta2$horsepower ~ auta2$mpg) 
+coef(modelarHP)
+abline(coef(modelarHP), col='red')
+anova(modelarHP)
+
 
 plot(auta$mpg, auta$acceleration,xlab = 'Miles per Gallon [mpg]', ylab = 'Acceleration [-]', col= 'blue')
 #zavislost spotreby na zrychlenmi
 modelar <- lm(auta$acceleration ~ auta$mpg) 
 coef(modelar)
 abline(coef(modelar), col='red')
+
 
 
 
