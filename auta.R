@@ -28,6 +28,8 @@ length(di$out)
 ro<- boxplot(auta$origin,ylab = 'Origin [-]',horizontal = TRUE,main='' )
 length(ro$out)
 
+boxplot(auta,main='' )
+
 
 #-----------------------bod 5 modelovali jsme-----------------
 #pred odstranenim (vizualizace tak bod 4)
@@ -51,8 +53,11 @@ anova(modelar)
 
 
 #----------- bod 6 jestli existuje zavislost na necem jinem
-boxplot(auta$mpg ~ auta$modelyear,xlab = 'Model year [-]', ylab = 'Miles per Gallon [mpg]' )
+boxplot(auta2$mpg ~ auta2$modelyear,xlab = 'Model year [-]', ylab = 'Miles per Gallon [mpg]' )
 #zavislost roku vyroby na spotrebe
+plot(auta2$mpg ~ auta2$displacement,xlab = 'Displacement [cubic inches]', ylab = 'Miles per Gallon [mpg]', col='blue' )
+#zavislost objemu na spotrebe
+
 boxplot(auta$mpg ~ auta$cylinders,xlab = 'Cylinders[-]', ylab = 'Miles per Gallon [mpg]' )
 #zavislost spotrebe na pocte valcu
 
